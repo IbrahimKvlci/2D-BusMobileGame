@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] bool _start;
+    [SerializeField] bool _end;
 
     BusController[] _busControllers;
 
@@ -18,14 +19,24 @@ public class GameController : MonoBehaviour
     {
         if (_start)
         {
-            foreach (var item in _busControllers)
-            {
-                if (item._canDrive)
-                {
-                    item.Drive();
-                }
-            }
+            Play();
 
         }
+    }
+
+    public void Play()
+    {
+        foreach (var item in _busControllers)
+        {
+            if (item._canDrive)
+            {
+                item.Drive();
+            }
+        }
+    }
+
+    public void GameOver()
+    {
+
     }
 }

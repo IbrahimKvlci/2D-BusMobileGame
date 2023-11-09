@@ -30,12 +30,16 @@ public class DrawPath : MonoBehaviour
         {
             RaycastHit2D hit = Physics2D.Raycast(_mousePosition, Vector2.zero);
 
-            if (hit.transform.gameObject==gameObject)
+            if (hit.collider!=null)
             {
-                ResetPath();
-                CreatePath();
-                _firstClick = true;
-                _canDraw = true;
+                if(hit.transform.gameObject == gameObject)
+                {
+                    ResetPath();
+                    CreatePath();
+                    _firstClick = true;
+                    _canDraw = true;
+                }
+                
             }
         }
 
