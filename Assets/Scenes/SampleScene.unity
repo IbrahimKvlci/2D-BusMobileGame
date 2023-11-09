@@ -485,9 +485,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _path: {fileID: 1288487298}
-  _rotationSpeed: 300
+  _rotationSpeed: 500
   _speed: 2
-  _distance: 0.3
+  _distance: 0.25
   _canDrive: 0
 --- !u!61 &1720972822
 BoxCollider2D:
@@ -631,6 +631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _start: 0
+  _end: 0
 --- !u!1 &1994299699
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,6 +721,14 @@ PrefabInstance:
     - target: {fileID: 3608759115787820709, guid: 96432ac3449cb304282aa159e31e3a58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453353222822074544, guid: 96432ac3449cb304282aa159e31e3a58, type: 3}
+      propertyPath: _distance
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453353222822074544, guid: 96432ac3449cb304282aa159e31e3a58, type: 3}
+      propertyPath: _rotationSpeed
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
