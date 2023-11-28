@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 4467188574383527411}
   - component: {fileID: 8979628535764730649}
   - component: {fileID: 3261592275878643716}
+  - component: {fileID: 1421621687460113194}
   - component: {fileID: 4453353222822074544}
   - component: {fileID: 6337642203412102742}
   - component: {fileID: 2771101815406880131}
@@ -347,6 +348,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1421621687460113194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8965328150060260549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71095164d4e3050409597c71b778ce76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4453353222822074544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,10 +373,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _path: {fileID: 3273949919715596510}
-  _rotationSpeed: 300
+  _rotationSpeed: 500
   _speed: 2
   _distance: 0.3
-  _canDrive: 0
 --- !u!50 &6337642203412102742
 Rigidbody2D:
   serializedVersion: 4
