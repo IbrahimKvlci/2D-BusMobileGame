@@ -376,6 +376,7 @@ MonoBehaviour:
   _rotationSpeed: 500
   _speed: 2
   _distance: 0.3
+  _counterFirstValue: 0
 --- !u!50 &6337642203412102742
 Rigidbody2D:
   serializedVersion: 4
