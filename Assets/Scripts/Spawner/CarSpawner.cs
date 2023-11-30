@@ -8,15 +8,18 @@ public class CarSpawner : SpawnerBase,ISpawner
 
     float timer = 0;
 
-    public override GameObject GameObj { get => CarPooling.Instance.GetGameObjectFromPool(); }
-
     public override void Spawn()
     {
-        timer += Time.deltaTime;
-        if(timer > timeToSpawnCar)
+        GameObj = CarPooling.Instance.GetGameObjectFromPool();
+        if (GameObj != null)
         {
-            base.Spawn();
-            timer = 0;
+            timer += Time.deltaTime;
+            if (timer > timeToSpawnCar)
+            {
+
+                base.Spawn();
+                timer = 0;
+            }
         }
     }
 

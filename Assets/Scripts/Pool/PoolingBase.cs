@@ -18,6 +18,7 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
             for (int i = 0; i < amountToPool; i++)
             {
                 var gameObj=Instantiate(prefab);
+                gameObj.name = i.ToString();
                 gameObj.SetActive(false);
                 gameObjectPool.Add(gameObj);
             }
@@ -26,13 +27,12 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
 
     public GameObject GetGameObjectFromPool()
     {
-        for(int i = 0;i < gameObjectPool.Count; i++)
-        {
+        int i=Random.Range(0, gameObjectPool.Count); 
             if (!gameObjectPool[i].activeInHierarchy)
             {
                 return gameObjectPool[i];
             }
-        }
+
         return null;
     }
 }

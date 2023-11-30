@@ -4,11 +4,19 @@ using UnityEngine;
 
 public abstract class SpawnerBase : MonoBehaviour, ISpawner
 {
-    public virtual GameObject GameObj { get;}
+    GameObject _gameObj;
+    public virtual GameObject GameObj
+    {
+        get
+        {
+            return _gameObj;
+        }
+        set { _gameObj = value; }
+    }
+
 
     public virtual void Spawn()
     {
-        
         if (GameObj != null)
         {
             GameObj.SetActive(true);
