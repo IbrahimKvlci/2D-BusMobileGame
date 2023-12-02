@@ -5,4 +5,5 @@ using UnityEngine;
 public interface IPooling
 {
     GameObject GetGameObjectFromPool();
+    GameObject GetRandomGameObjectFromPool();
 }

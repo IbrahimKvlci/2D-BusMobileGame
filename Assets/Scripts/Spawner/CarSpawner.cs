@@ -10,7 +10,7 @@ public class CarSpawner : SpawnerBase,ISpawner
 
     public override void Spawn()
     {
-        GameObj = CarPooling.Instance.GetGameObjectFromPool();
+        GameObj = CarPooling.Instance.GetRandomGameObjectFromPool();
         if (GameObj != null)
         {
             timer += Time.deltaTime;

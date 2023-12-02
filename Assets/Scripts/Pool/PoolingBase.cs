@@ -25,7 +25,7 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
         }
     }
 
-    public GameObject GetGameObjectFromPool()
+    public GameObject GetRandomGameObjectFromPool()
     {
         int i=Random.Range(0, gameObjectPool.Count); 
             if (!gameObjectPool[i].activeInHierarchy)
@@ -33,6 +33,18 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
                 return gameObjectPool[i];
             }
 
+        return null;
+    }
+
+    public GameObject GetGameObjectFromPool()
+    {
+        for (int i = 0;i < amountToPool; i++)
+        {
+            if (!gameObjectPool[i].activeInHierarchy)
+            {
+                return gameObjectPool[i];
+            }
+        }
         return null;
     }
 }
