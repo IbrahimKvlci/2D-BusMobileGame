@@ -4,6 +4,10 @@ using UnityEngine;
 
 public abstract class SpawnerBase : MonoBehaviour, ISpawner
 {
+    [SerializeField] float timeToSpawn;
+
+    float timer = 0;
+
     GameObject _gameObj;
     public virtual GameObject GameObj
     {
@@ -17,11 +21,18 @@ public abstract class SpawnerBase : MonoBehaviour, ISpawner
 
     public virtual void Spawn()
     {
-        if (GameObj != null)
+        timer += Time.deltaTime;
+        if (timer > timeToSpawn)
         {
-            GameObj.SetActive(true);
-            GameObj.transform.position = transform.position;
-            GameObj.transform.rotation = transform.rotation;
+
+            if (GameObj != null)
+            {
+                GameObj.SetActive(true);
+                GameObj.transform.position = transform.position;
+                GameObj.transform.rotation = transform.rotation;
+            }
+            timer = 0;
         }
+        
     }
 }

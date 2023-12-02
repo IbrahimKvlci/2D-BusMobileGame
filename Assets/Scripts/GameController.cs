@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour
         _start = false;
         IsGameOver = false;
         _movableObjects = FindObjectsOfType<MonoBehaviour>(true).OfType<IMovable>().ToArray();
-        _spawners = FindObjectsOfType<MonoBehaviour>(true).OfType<ISpawner>().ToArray();
+        _spawners = FindObjectsOfType<MonoBehaviour>(false).OfType<ISpawner>().ToArray();
     }
 
     void Update()

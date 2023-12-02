@@ -8,7 +8,8 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
 
     [SerializeField] int amountToPool;
 
-    List<GameObject> gameObjectPool=new List<GameObject>();
+    public List<GameObject> gameObjectPool=new List<GameObject>();
+    public List<GameObject> activeGameObjects=new List<GameObject>();
 
 
     private void Start()
@@ -20,6 +21,7 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
                 var gameObj=Instantiate(prefab);
                 gameObj.name = i.ToString();
                 gameObj.SetActive(false);
+                gameObj.transform.SetParent(transform);
                 gameObjectPool.Add(gameObj);
             }
         }
@@ -27,12 +29,14 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
 
     public GameObject GetRandomGameObjectFromPool()
     {
-        int i=Random.Range(0, gameObjectPool.Count); 
+        if(gameObjectPool.Count > 0)
+        {
+            int i = Random.Range(0, gameObjectPool.Count);
             if (!gameObjectPool[i].activeInHierarchy)
             {
                 return gameObjectPool[i];
             }
-
+        }
         return null;
     }
 
@@ -47,5 +51,19 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
         }
         return null;
     }
+
+    public bool CheckGameObjectActive()
+    {
+        for (int i = 0; i < gameObjectPool.Count; i++)
+        {
+            if (gameObjectPool[i].activeInHierarchy)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+   
 }
 

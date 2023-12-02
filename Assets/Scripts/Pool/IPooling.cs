@@ -6,4 +6,6 @@ public interface IPooling
 {
     GameObject GetGameObjectFromPool();
     GameObject GetRandomGameObjectFromPool();
+
+    bool CheckGameObjectActive();
 }
