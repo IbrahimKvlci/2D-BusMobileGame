@@ -7,30 +7,56 @@ public class Station :MonoBehaviour, IStation
     [SerializeField] float timeToGetPassenger;
 
     float timer=0;
+    bool isBusInside=false;
 
     public void GetPassenger(GameObject passenger)
     {
-        HumanPooling.Instance.gameObjectPool.Remove(passenger);
-        HumanPooling.Instance.activeGameObjects.Remove(passenger);
+        HumanPooling.Instance.GameObjectPool.Remove(passenger);
+        HumanPooling.Instance.ActiveGameObjects.Remove(passenger);
         Destroy(passenger);
         Debug.Log("Got Passenger");
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void Update()
     {
-        if (collision.gameObject.GetComponent<Bus>()!=null && HumanPooling.Instance.gameObjectPool.Count>0)
+        if (isBusInside)
         {
-            timer += Time.deltaTime;
-            if(timer > timeToGetPassenger)
+            if (HumanPooling.Instance.GameObjectPool.Count > 0)
             {
-                if (HumanPooling.Instance.activeGameObjects.Count > 0)
+                timer += Time.deltaTime;
+                if (timer > timeToGetPassenger)
                 {
-                    GetPassenger(HumanPooling.Instance.activeGameObjects[0]);
-                    Debug.Log("End of loop");
+                    if (HumanPooling.Instance.ActiveGameObjects.Count > 0)
+                    {
+                        Debug.Log("Beginig");
+                        GetPassenger(HumanPooling.Instance.ActiveGameObjects[0]);
+
+                        Debug.Log("End of loop");
+                    }
+                    timer = 0;
+                    print("Check!");
                 }
-                timer= 0;
+                print(timer);
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        print("Bus");
+        if (collision.CompareTag("bus"))
+        {
+            isBusInside=true;
+            
+            
             
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isBusInside=false;
+    }
+
 }

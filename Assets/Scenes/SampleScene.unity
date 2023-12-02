@@ -157,7 +157,7 @@ MonoBehaviour:
   - {fileID: 1449417252251263289, guid: e4b88454a295106489dc18d956088554, type: 3}
   - {fileID: 898296293371643445, guid: aeaf40d949b4a804bb8c8a56379bd89c, type: 3}
   amountToPool: 10
-  gameObjectPool: []
+  gameObjects: []
   activeGameObjects: []
 --- !u!4 &96711606
 Transform:
@@ -446,7 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83562546db9351941bfec35a8bafa3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToGetPassenger: 5
+  timeToGetPassenger: 2
 --- !u!1 &1738758660
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +525,7 @@ MonoBehaviour:
   gameObjectPrefabs:
   - {fileID: 8064011047861858058, guid: 7240a8015fa05614ca8281dbee42af8f, type: 3}
   amountToPool: 5
-  gameObjectPool: []
+  gameObjects: []
   activeGameObjects: []
 --- !u!4 &1779788409
 Transform:

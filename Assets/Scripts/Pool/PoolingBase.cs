@@ -8,9 +8,20 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
 
     [SerializeField] int amountToPool;
 
-    public List<GameObject> gameObjectPool=new List<GameObject>();
-    public List<GameObject> activeGameObjects=new List<GameObject>();
-
+    [SerializeField]
+    List<GameObject> gameObjects=new List<GameObject>();
+    public List<GameObject> GameObjectPool
+    {
+        get { return gameObjects; }
+        set { gameObjects = value; }
+    }
+    [SerializeField]
+    List<GameObject> activeGameObjects = new List<GameObject>();
+    public List<GameObject> ActiveGameObjects
+    {
+        get { return activeGameObjects; }
+        set { activeGameObjects = value; }
+    }
 
     private void Start()
     {
@@ -22,19 +33,19 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
                 gameObj.name = i.ToString();
                 gameObj.SetActive(false);
                 gameObj.transform.SetParent(transform);
-                gameObjectPool.Add(gameObj);
+                GameObjectPool.Add(gameObj);
             }
         }
     }
 
     public GameObject GetRandomGameObjectFromPool()
     {
-        if(gameObjectPool.Count > 0)
+        if(GameObjectPool.Count > 0)
         {
-            int i = Random.Range(0, gameObjectPool.Count);
-            if (!gameObjectPool[i].activeInHierarchy)
+            int i = Random.Range(0, GameObjectPool.Count);
+            if (!GameObjectPool[i].activeInHierarchy)
             {
-                return gameObjectPool[i];
+                return GameObjectPool[i];
             }
         }
         return null;
@@ -44,9 +55,9 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
     {
         for (int i = 0;i < amountToPool; i++)
         {
-            if (!gameObjectPool[i].activeInHierarchy)
+            if (!GameObjectPool[i].activeInHierarchy)
             {
-                return gameObjectPool[i];
+                return GameObjectPool[i];
             }
         }
         return null;
@@ -54,9 +65,9 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
 
     public bool CheckGameObjectActive()
     {
-        for (int i = 0; i < gameObjectPool.Count; i++)
+        for (int i = 0; i < GameObjectPool.Count; i++)
         {
-            if (gameObjectPool[i].activeInHierarchy)
+            if (GameObjectPool[i].activeInHierarchy)
             {
                 return true;
             }

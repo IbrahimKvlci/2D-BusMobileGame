@@ -8,4 +8,7 @@ public interface IPooling
     GameObject GetRandomGameObjectFromPool();
 
     bool CheckGameObjectActive();
+
+    public List<GameObject> GameObjectPool { get; set; }
+    public List<GameObject> ActiveGameObjects { get; set; }
 }

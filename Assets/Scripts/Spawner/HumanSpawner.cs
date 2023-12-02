@@ -5,18 +5,30 @@ using UnityEngine;
 public class HumanSpawner : SpawnerBase, ISpawner
 {
 
+    private void Start()
+    {
+        Pooling = HumanPooling.Instance;
+    }
+
+
     public override void Spawn()
     {
-        
-        if (!HumanPooling.Instance.CheckGameObjectActive())
+        if(HumanPooling.Instance.GameObjectPool.Count> 0)
         {
-            GameObj = HumanPooling.Instance.GetRandomGameObjectFromPool();
-            if (GameObj != null)
+            if (!HumanPooling.Instance.CheckGameObjectActive())
             {
-                base.Spawn();
-                HumanPooling.Instance.activeGameObjects.Add(GameObj);
+
+                GameObj = HumanPooling.Instance.GetRandomGameObjectFromPool();
+                print(GameObj.name);
+                if (GameObj != null)
+                {
+                    base.Spawn();
+
+                }
+
             }
         }
+        
         
 
         

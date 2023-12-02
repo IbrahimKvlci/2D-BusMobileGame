@@ -4,9 +4,21 @@ using UnityEngine;
 
 public abstract class SpawnerBase : MonoBehaviour, ISpawner
 {
+    
+
     [SerializeField] float timeToSpawn;
 
     float timer = 0;
+
+    IPooling _pooling;
+    public virtual IPooling Pooling
+    {
+        get
+        {
+            return _pooling;
+        }
+        set { _pooling = value; }
+    }
 
     GameObject _gameObj;
     public virtual GameObject GameObj
@@ -30,6 +42,10 @@ public abstract class SpawnerBase : MonoBehaviour, ISpawner
                 GameObj.SetActive(true);
                 GameObj.transform.position = transform.position;
                 GameObj.transform.rotation = transform.rotation;
+                if (!Pooling.ActiveGameObjects.Contains(GameObj))
+                {
+                    Pooling.ActiveGameObjects.Add(GameObj);
+                }
             }
             timer = 0;
         }

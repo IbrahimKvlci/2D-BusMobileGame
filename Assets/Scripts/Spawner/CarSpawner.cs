@@ -11,7 +11,7 @@ public class CarSpawner : SpawnerBase,ISpawner
         if (GameObj != null)
         {
             base.Spawn();
-            CarPooling.Instance.activeGameObjects.Add(GameObj);
+            CarPooling.Instance.ActiveGameObjects.Add(GameObj);
         }
     }
 
