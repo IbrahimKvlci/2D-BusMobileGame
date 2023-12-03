@@ -19,7 +19,6 @@ public class HumanSpawner : SpawnerBase, ISpawner
             {
 
                 GameObj = HumanPooling.Instance.GetRandomGameObjectFromPool();
-                print(GameObj.name);
                 if (GameObj != null)
                 {
                     base.Spawn();

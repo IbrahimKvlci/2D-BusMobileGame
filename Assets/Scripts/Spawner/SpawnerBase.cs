@@ -42,10 +42,7 @@ public abstract class SpawnerBase : MonoBehaviour, ISpawner
                 GameObj.SetActive(true);
                 GameObj.transform.position = transform.position;
                 GameObj.transform.rotation = transform.rotation;
-                if (!Pooling.ActiveGameObjects.Contains(GameObj))
-                {
-                    Pooling.ActiveGameObjects.Add(GameObj);
-                }
+                Pooling.AddActiveGameObjectToList(GameObj);
             }
             timer = 0;
         }

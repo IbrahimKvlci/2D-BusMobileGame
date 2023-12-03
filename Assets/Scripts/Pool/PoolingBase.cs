@@ -75,6 +75,12 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
         return false;
     }
 
-   
+    public void AddActiveGameObjectToList(GameObject gameObject)
+    {
+        if (!ActiveGameObjects.Contains(gameObject))
+        {
+            ActiveGameObjects.Add(gameObject);
+        }
+    }
 }
 
