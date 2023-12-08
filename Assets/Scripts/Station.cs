@@ -4,67 +4,73 @@ using UnityEngine;
 
 public class Station : MonoBehaviour, IStation
 {
-    [SerializeField] float timeToGetPassenger;
 
-    BusController busController;
+    [SerializeField] HumanSpawner humanSpawner;
+    [SerializeField] float timeToGetPassenger;
+    [SerializeField] int countOfPassenger;
+
+    GameObject bus;
     ISensor sensor;
 
-    float timer = 0;
-    bool isBusInside = false;
+    
 
-    public void GetPassenger(GameObject passenger)
+    float timer = 0;
+
+    public int CountOfPassenger
     {
-        HumanPooling.Instance.GameObjectPool.Remove(passenger);
-        HumanPooling.Instance.ActiveGameObjects.Remove(passenger);
-        Destroy(passenger);
+        get { return countOfPassenger; }
+        set { countOfPassenger = value; }
+    }
+
+
+    public HumanSpawner HumanSpawner
+    {
+        get
+        {
+            return humanSpawner;
+        }
+        set { humanSpawner = value;}
     }
 
     private void Update()
     {
-        if (isBusInside)
+
+        if(sensor != null)
         {
             if (sensor.IsSensed())
             {
-                busController.CanMove = false;
-                if (HumanPooling.Instance.GameObjectPool.Count > 0)
+                bus.GetComponent<BusController>().CanMove = false;
+                if (countOfPassenger > 0)
                 {
                     timer += Time.deltaTime;
                     if (timer > timeToGetPassenger)
                     {
-                        if (HumanPooling.Instance.ActiveGameObjects.Count > 0)
+                        if (humanSpawner.ActiveGameObjects.Count > 0)
                         {
-                            GetPassenger(HumanPooling.Instance.ActiveGameObjects[0]);
-
+                            bus.GetComponent<IBusPassenger>().GetPassenger(humanSpawner.ActiveGameObjects[0]);
                         }
                         timer = 0;
                     }
-                    print("c");
                 }
                 else
                 {
-                    busController.CanMove = true;
+                    bus.GetComponent<BusController>().CanMove = true;
                 }
-                print("b");
             }
-            
         }
-        print(isBusInside);
-    }
 
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("bus"))
         {
-            busController = collision.GetComponent<BusController>();
-            sensor = collision.gameObject.GetComponentInChildren<ISensor>();
-            isBusInside = true;
+            bus = collision.gameObject;
+            sensor=collision.gameObject.GetComponentInChildren<ISensor>();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        isBusInside = false;
-    }
+
+
 
 }

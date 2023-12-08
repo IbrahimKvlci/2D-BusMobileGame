@@ -4,5 +4,8 @@ using UnityEngine;
 
 public interface IStation
 {
-    void GetPassenger(GameObject passenger);
+
+
+    public HumanSpawner HumanSpawner { get; set; }
+    public int CountOfPassenger { get; set; }
 }

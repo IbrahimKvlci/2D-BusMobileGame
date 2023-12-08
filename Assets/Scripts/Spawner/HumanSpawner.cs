@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HumanSpawner : SpawnerBase, ISpawner
 {
+    [SerializeField] GameObject station;
 
     private void Start()
     {
@@ -13,23 +14,14 @@ public class HumanSpawner : SpawnerBase, ISpawner
 
     public override void Spawn()
     {
-        if(HumanPooling.Instance.GameObjectPool.Count> 0)
+        if (station.GetComponent<Station>().CountOfPassenger > 0&&ActiveGameObjects.Count==0)
         {
-            if (!HumanPooling.Instance.CheckGameObjectActive())
+            GameObj = HumanPooling.Instance.GetRandomGameObjectFromPool();
+            if (GameObj != null)
             {
-
-                GameObj = HumanPooling.Instance.GetRandomGameObjectFromPool();
-                if (GameObj != null)
-                {
-                    base.Spawn();
-
-                }
-
+                base.Spawn();
             }
         }
-        
-        
 
-        
     }
 }

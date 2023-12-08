@@ -30,22 +30,26 @@ public abstract class SpawnerBase : MonoBehaviour, ISpawner
         set { _gameObj = value; }
     }
 
+    List<GameObject> _activeGameObjects=new List<GameObject>();
+    public List<GameObject> ActiveGameObjects
+    {
+        get { return _activeGameObjects; }
+        set { _activeGameObjects = value; }
+    }
 
     public virtual void Spawn()
     {
-        timer += Time.deltaTime;
-        if (timer > timeToSpawn)
+        if(!ActiveGameObjects.Contains(GameObj))
         {
-
-            if (GameObj != null)
+            timer += Time.deltaTime;
+            if (timer > timeToSpawn)
             {
                 GameObj.SetActive(true);
+                ActiveGameObjects.Add(GameObj);
                 GameObj.transform.position = transform.position;
                 GameObj.transform.rotation = transform.rotation;
-                Pooling.AddActiveGameObjectToList(GameObj);
+                timer = 0;
             }
-            timer = 0;
-        }
-        
+        } 
     }
 }
