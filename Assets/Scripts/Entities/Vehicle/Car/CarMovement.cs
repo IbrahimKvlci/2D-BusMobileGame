@@ -19,4 +19,13 @@ public class CarMovement : MonoBehaviour, IMovable
     {
         transform.Translate(Vector3.up * _speed*Time.deltaTime);
     }
+
+    public void Run()
+    {
+        if(CanMove)
+        {
+            Move();
+        }
+       
+    }
 }

@@ -18,7 +18,7 @@ public class SensorController : MonoBehaviour, ISensor
         RaycastHit2D hit3 = Physics2D.Raycast(_sensors[3].transform.position, _sensors[3].transform.right, _distance, _layerMask);
 
 
-
+        
         if ((hit0.collider && hit1.collider != null)&&(hit2.collider&&hit3.collider!=null))
         {
             return true;

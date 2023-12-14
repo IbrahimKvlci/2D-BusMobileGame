@@ -8,8 +8,8 @@ public class GameController : MonoBehaviour
     [SerializeField] bool _start;
     [SerializeField] bool _end;
 
-    IMovable[] _movableObjects;
-    ISpawner[] _spawners;
+    IRunOnLoad[] _runOnLoad;
+    IRunOnStart[] _runOnStart;
 
     public bool IsGameOver { get; set; } 
 
@@ -26,19 +26,24 @@ public class GameController : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-       
+        
     }
 
     private void Start()
     {
         _start = false;
         IsGameOver = false;
-        _movableObjects = FindObjectsOfType<MonoBehaviour>(true).OfType<IMovable>().ToArray();
-        _spawners = FindObjectsOfType<MonoBehaviour>(false).OfType<ISpawner>().ToArray();
+        _runOnLoad = FindObjectsOfType<MonoBehaviour>(true).OfType<IRunOnLoad>().ToArray();
+        _runOnStart = FindObjectsOfType<MonoBehaviour>(true).OfType<IRunOnStart>().ToArray();
+        
     }
 
     void Update()
     {
+        foreach (var item in _runOnLoad)
+        {
+            item.Run();
+        }
         if (_start)
         {
             Play();
@@ -48,18 +53,9 @@ public class GameController : MonoBehaviour
 
     public void Play()
     {
-        foreach (var item in _movableObjects)
+        foreach (var item in _runOnStart)
         {
-            if (item.CanMove)
-            {
-                item.Move();
-
-            }
-            
-        }
-        foreach (var item in _spawners)
-        {
-            item.Spawn();
+            item.Run();
         }
     }
 

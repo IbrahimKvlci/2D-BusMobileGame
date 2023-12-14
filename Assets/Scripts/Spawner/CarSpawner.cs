@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarSpawner : SpawnerBase,ISpawner
+public class CarSpawner : SpawnerBase, ISpawnerOnPlay
 {
+    [SerializeField] GameObject _trafficLight;
 
     private void Start()
     {
@@ -19,4 +20,9 @@ public class CarSpawner : SpawnerBase,ISpawner
         }
     }
 
+    public void Run()
+    {
+        if (_trafficLight.GetComponent<ITrafficLight>().Light)
+        Spawn();
+    }
 }

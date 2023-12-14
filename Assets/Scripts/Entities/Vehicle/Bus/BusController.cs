@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class BusController :MonoBehaviour,IMovable
+public class BusController : MonoBehaviour, IMovable
 {
     [SerializeField] Transform _path;
 
@@ -45,4 +45,12 @@ public class BusController :MonoBehaviour,IMovable
         }
     }
 
+    public void Run()
+    {
+        if(CanMove)
+        {
+            Move();
+        }
+        
+    }
 }

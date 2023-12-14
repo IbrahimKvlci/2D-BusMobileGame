@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HumanSpawner : SpawnerBase, ISpawner
+public class HumanSpawner : SpawnerBase,ISpawnerOnScreenLoad
 {
     [SerializeField] GameObject station;
 
@@ -23,5 +23,10 @@ public class HumanSpawner : SpawnerBase, ISpawner
             }
         }
 
+    }
+
+    public void Run()
+    {
+       Spawn();
     }
 }
