@@ -9,6 +9,8 @@ public class HumanSpawner : SpawnerBase,ISpawnerOnScreenLoad
     private void Start()
     {
         Pooling = HumanPooling.Instance;
+        ActiveGameObjects.Add(Pooling.ActiveGameObjects[0]);
+        Pooling.ActiveGameObjects[0].transform.position = transform.position;
     }
 
 

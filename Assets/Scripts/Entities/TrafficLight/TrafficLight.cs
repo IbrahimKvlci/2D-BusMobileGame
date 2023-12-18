@@ -5,10 +5,15 @@ using UnityEngine;
 public class TrafficLight :MonoBehaviour, ITrafficLight
 {
     [SerializeField]
+    Sprite[] _lightSprites;
+
+    [SerializeField]
     bool _light;
 
     [SerializeField]
     float timeToCarsMove;
+
+    SpriteRenderer _sR;
 
     float timer;
 
@@ -20,14 +25,16 @@ public class TrafficLight :MonoBehaviour, ITrafficLight
 
     private void Start()
     {
+        _sR = GetComponent<SpriteRenderer>();
         if (Light)
         {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+            _sR.sprite = _lightSprites[1];
         }
         else
         {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            _sR.sprite = _lightSprites[0];
         }
+        
     }
 
     public void AdjustTrafficLight()
@@ -38,12 +45,12 @@ public class TrafficLight :MonoBehaviour, ITrafficLight
             if (Light)
             {
                 Light = false;
-                gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                _sR.sprite = _lightSprites[0];
             }
             else
             {
                 Light = true;
-                gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+                _sR.sprite = _lightSprites[1];
             }
             
             timer = 0;

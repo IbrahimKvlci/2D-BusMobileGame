@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface ISensor
 {
-    bool IsSensed();
+    bool IsSensedOnStation();
+    bool IsSensedOnFinishPoint();
 }

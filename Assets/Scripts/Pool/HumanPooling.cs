@@ -13,4 +13,15 @@ public class HumanPooling : PoolingBase,IPooling
             Instance = this;
         }
     }
+
+    public override void Start()
+    {
+        base.Start();
+        var activeGameObject= GetRandomGameObjectFromPool();
+        activeGameObject.SetActive(true);
+        ActiveGameObjects.Add(activeGameObject);
+
+    }
+
+
 }

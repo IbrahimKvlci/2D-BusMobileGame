@@ -11,7 +11,8 @@ public class GameController : MonoBehaviour
     IRunOnLoad[] _runOnLoad;
     IRunOnStart[] _runOnStart;
 
-    public bool IsGameOver { get; set; } 
+    public bool IsGameOver { get; set; }
+    public bool IsFinished { get; set; }
 
     public static GameController Instance { get; private set; }
 
@@ -57,6 +58,12 @@ public class GameController : MonoBehaviour
         {
             item.Run();
         }
+    }
+
+    public void Finish()
+    {
+        print("Finish");
+        IsFinished = true;
     }
 
     public void GameOver()

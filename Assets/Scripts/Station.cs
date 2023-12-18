@@ -37,7 +37,7 @@ public class Station : MonoBehaviour, IStation
 
         if(sensor != null)
         {
-            if (sensor.IsSensed())
+            if (sensor.IsSensedOnStation())
             {
                 bus.GetComponent<BusController>().CanMove = false;
                 if (countOfPassenger > 0)

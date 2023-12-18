@@ -23,7 +23,7 @@ public abstract class PoolingBase : MonoBehaviour,IPooling
         set { activeGameObjects = value; }
     }
 
-    private void Start()
+    public virtual void Start()
     {
         foreach (var prefab in gameObjectPrefabs)
         {
