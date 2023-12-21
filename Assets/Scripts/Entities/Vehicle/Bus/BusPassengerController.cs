@@ -12,5 +12,6 @@ public class BusPassengerController : MonoBehaviour,IBusPassenger
         print(passenger.name);
         busStation.GetComponent<IStation>().HumanSpawner.ActiveGameObjects.Remove(passenger);
         passenger.SetActive(false);
+        passenger.GetComponent<ICollectible>().CollectItem();
     }
 }

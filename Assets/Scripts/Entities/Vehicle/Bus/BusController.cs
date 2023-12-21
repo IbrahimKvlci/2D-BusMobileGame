@@ -14,6 +14,8 @@ public class BusController : MonoBehaviour, IMovable
 
     int _counter;
 
+    bool _lineFinished;
+
     public bool CanMove { get ; set ; }
 
     private void Start()
@@ -42,6 +44,7 @@ public class BusController : MonoBehaviour, IMovable
         if (_counter == _path.childCount - 1)
         {
             CanMove = false;
+            _lineFinished = true;
         }
     }
 
@@ -51,6 +54,9 @@ public class BusController : MonoBehaviour, IMovable
         {
             Move();
         }
-        
+        else if(_lineFinished && !GameController.Instance.IsFinished)
+        {
+            GameController.Instance.GameOver();
+        }
     }
 }

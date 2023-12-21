@@ -6,21 +6,17 @@ public class HumanPooling : PoolingBase,IPooling
 {
    public static HumanPooling Instance { get; private set; }
 
-    private void Awake()
+
+    public override void Awake()
     {
-        if(Instance==null)
+        if (Instance == null)
         {
             Instance = this;
         }
-    }
-
-    public override void Start()
-    {
-        base.Start();
+        base.Awake();
         var activeGameObject= GetRandomGameObjectFromPool();
-        activeGameObject.SetActive(true);
         ActiveGameObjects.Add(activeGameObject);
-
+        activeGameObject.SetActive(true);
     }
 
 

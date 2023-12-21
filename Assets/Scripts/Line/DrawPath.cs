@@ -14,52 +14,68 @@ public class DrawPath : MonoBehaviour
 
     Vector2 _mousePosition;
     
-    bool _firstClick, _canDraw;
+    bool _firstClick, _countinueDraw,_canDraw;
+
+    public bool CountinueDraw
+    {
+        get { return _countinueDraw; }
+        set { _countinueDraw = value; }
+    }
+
+    public bool CanDraw
+    {
+        get { return _canDraw; }
+        set { _canDraw = value; }
+    }
 
     private void Start()
     {
         _firstClick = false;
-        _canDraw = true;
-        
+        CountinueDraw = true;
+        CanDraw= true;
     }
 
     private void Update()
     {
-        _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0) && !_firstClick)
+        if (CanDraw)
         {
-            RaycastHit2D hit = Physics2D.Raycast(_mousePosition, Vector2.zero);
-
-            if (hit.collider!=null)
+            _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (Input.GetMouseButtonDown(0) && !_firstClick)
             {
-                if(hit.transform.gameObject == gameObject)
+                RaycastHit2D hit = Physics2D.Raycast(_mousePosition, Vector2.zero);
+
+                if (hit.collider != null)
                 {
-                    ResetPath();
-                    CreatePath();
-                    _firstClick = true;
-                    _canDraw = true;
-                }
-                
-            }
-        }
+                    if (hit.transform.gameObject == gameObject)
+                    {
+                        ResetPath();
+                        CreatePath();
+                        _firstClick = true;
+                        CountinueDraw = true;
+                    }
 
-        if (Input.GetMouseButton(0))
-        {
-            if (_canDraw && _firstClick && Vector3.Distance(_mousePosition, _pathGameObject.transform.position) > 0.2f)
+                }
+            }
+
+            if (Input.GetMouseButton(0))
             {
-                CreatePath();
-                _lineController.SetUpLine(_points);
+                if (CountinueDraw && _firstClick && Vector3.Distance(_mousePosition, _pathGameObject.transform.position) > 0.2f)
+                {
+                    CreatePath();
+                    _lineController.SetUpLine(_points);
+                }
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+
+                if (_firstClick)
+                {
+                    CountinueDraw = false;
+                    _firstClick = false;
+                }
             }
         }
-        if (Input.GetMouseButtonUp(0))
-        {
-            
-            if (_firstClick)
-            {
-                _canDraw = false;
-                _firstClick = false;
-            }
-        }
+        
 
     }
 

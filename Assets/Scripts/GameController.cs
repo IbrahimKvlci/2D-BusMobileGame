@@ -13,11 +13,13 @@ public class GameController : MonoBehaviour
 
     public bool IsGameOver { get; set; }
     public bool IsFinished { get; set; }
+    public bool IsPaused { get; set; }
 
     public static GameController Instance { get; private set; }
 
     private void Awake()
     {
+        
         if(Instance != null)
         {
             Destroy(gameObject);
@@ -25,31 +27,36 @@ public class GameController : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
         }
         
     }
+
+    
 
     private void Start()
     {
         _start = false;
         IsGameOver = false;
-        _runOnLoad = FindObjectsOfType<MonoBehaviour>(true).OfType<IRunOnLoad>().ToArray();
-        _runOnStart = FindObjectsOfType<MonoBehaviour>(true).OfType<IRunOnStart>().ToArray();
-        
+        _runOnLoad = FindObjectsOfType<MonoBehaviour>(false).OfType<IRunOnLoad>().ToArray();
+        _runOnStart = FindObjectsOfType<MonoBehaviour>(false).OfType<IRunOnStart>().ToArray();
+        Time.timeScale = 1;
     }
 
     void Update()
     {
-        foreach (var item in _runOnLoad)
+        if (!IsPaused)
         {
-            item.Run();
-        }
-        if (_start)
-        {
-            Play();
+            foreach (var item in _runOnLoad)
+            {
+                item.Run();
+            }
+            if (_start)
+            {
+                Play();
 
+            }
         }
+        
     }
 
     public void Play()
@@ -62,13 +69,37 @@ public class GameController : MonoBehaviour
 
     public void Finish()
     {
+        UIManager.instance.FinishGame();
         print("Finish");
         IsFinished = true;
+        Pause();
+    }
+
+    public void PauseGame()
+    {
+        Pause();
     }
 
     public void GameOver()
     {
+        UIManager.instance.GameOver();
         Debug.Log("Game Over!");
         IsGameOver = true;
+        Pause();
+        
+    }
+
+    void Pause()
+    {
+        IsPaused = true;
+        FindObjectOfType<DrawPath>().CanDraw = false;
+        Time.timeScale = 0;
+    }
+
+    public void Continue()
+    {
+        IsPaused = false;
+        Time.timeScale = 1;
+        FindObjectOfType<DrawPath>().CanDraw = true;
     }
 }
