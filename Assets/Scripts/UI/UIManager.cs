@@ -38,12 +38,16 @@ public class UIManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //GameController.Instance.Continue();
     }
 
     public void Continue()
     {
         _pausePanel.SetActive(false);
         GameController.Instance.Continue();
+    }
+
+    public void NewGame()
+    {
+        SceneManager.LoadScene(PlayerPrefsManager.GetLevel());
     }
 }

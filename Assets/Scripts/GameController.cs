@@ -69,6 +69,7 @@ public class GameController : MonoBehaviour
 
     public void Finish()
     {
+        PlayerPrefsManager.SetPlayerLevel(PlayerPrefsManager.GetLevel() + 1);
         UIManager.instance.FinishGame();
         print("Finish");
         IsFinished = true;

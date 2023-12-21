@@ -722,7 +722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelsBtnPrefab: {fileID: 466676409134298388, guid: e74ae538337c28d49948ff1255cd1f50, type: 3}
   _levelsContent: {fileID: 890901956}
-  _levelsCount: 15
+  _levelsCount: 10
 --- !u!1 &1532399373
 GameObject:
   m_ObjectHideFlags: 0
