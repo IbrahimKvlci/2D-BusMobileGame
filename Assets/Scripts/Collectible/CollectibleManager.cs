@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CollectibleManager : MonoBehaviour, ICollectibleService
 {
-    [SerializeField] int _coinCount;
+    [SerializeField] int _coinCount,_coinValuePerPerson;
 
     public int CoinCount
     {
@@ -24,7 +24,7 @@ public class CollectibleManager : MonoBehaviour, ICollectibleService
 
     public void CollectCoin()
     {
-        CoinCount++;
+        CoinCount+=_coinValuePerPerson;
         OnCoinValueChanged?.Invoke(CoinCount);
     }
 }

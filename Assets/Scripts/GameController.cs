@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     IRunOnLoad[] _runOnLoad;
     IRunOnStart[] _runOnStart;
 
+    IPathService _pathService;
+
     public bool IsGameOver { get; set; }
     public bool IsFinished { get; set; }
     public bool IsPaused { get; set; }
@@ -39,6 +41,7 @@ public class GameController : MonoBehaviour
         IsGameOver = false;
         _runOnLoad = FindObjectsOfType<MonoBehaviour>(false).OfType<IRunOnLoad>().ToArray();
         _runOnStart = FindObjectsOfType<MonoBehaviour>(false).OfType<IRunOnStart>().ToArray();
+        _pathService = GetComponent<IPathService>();
         Time.timeScale = 1;
     }
 
@@ -50,7 +53,7 @@ public class GameController : MonoBehaviour
             {
                 item.Run();
             }
-            if (_start)
+            if (_pathService.PathIsDone())
             {
                 Play();
 
@@ -70,6 +73,7 @@ public class GameController : MonoBehaviour
     public void Finish()
     {
         PlayerPrefsManager.SetPlayerLevel(PlayerPrefsManager.GetLevel() + 1);
+        PlayerPrefsManager.SetCoin(PlayerPrefsManager.GetCoin() + CollectibleManager.Instance.CoinCount);
         UIManager.instance.FinishGame();
         print("Finish");
         IsFinished = true;

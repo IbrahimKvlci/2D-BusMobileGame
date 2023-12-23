@@ -740,6 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coinCount: 0
+  _coinValuePerPerson: 5
 --- !u!4 &188912812
 Transform:
   m_ObjectHideFlags: 0
@@ -4293,10 +4294,6 @@ PrefabInstance:
     - target: {fileID: 4734528792997341259, guid: 6f651ab769d9a774ab8a0a6942074d6f, type: 3}
       propertyPath: m_Name
       value: GameControl
-      objectReference: {fileID: 0}
-    - target: {fileID: 4734528792997341259, guid: 6f651ab769d9a774ab8a0a6942074d6f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8825573467782268000, guid: 6f651ab769d9a774ab8a0a6942074d6f, type: 3}
       propertyPath: m_RootOrder

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawPath : MonoBehaviour
+public class DrawPath : MonoBehaviour,IPath
 {
     [SerializeField] LineController _lineController;
     [SerializeField] GameObject _parentOfPath;
@@ -14,7 +14,7 @@ public class DrawPath : MonoBehaviour
 
     Vector2 _mousePosition;
     
-    bool _firstClick, _countinueDraw,_canDraw;
+    bool _firstClick, _countinueDraw,_canDraw,_isTherePath;
 
     public bool CountinueDraw
     {
@@ -26,6 +26,12 @@ public class DrawPath : MonoBehaviour
     {
         get { return _canDraw; }
         set { _canDraw = value; }
+    }
+
+    public bool IsTherePath
+    {
+        get { return _isTherePath; }
+        private set { _isTherePath = value; }
     }
 
     private void Start()
@@ -72,6 +78,7 @@ public class DrawPath : MonoBehaviour
                 {
                     CountinueDraw = false;
                     _firstClick = false;
+                    _isTherePath = true;
                 }
             }
         }
@@ -95,5 +102,6 @@ public class DrawPath : MonoBehaviour
         {
             Destroy(_parentOfPath.transform.GetChild(i).gameObject);
         }
+        _isTherePath = false;
     }
 }
