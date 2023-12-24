@@ -8,9 +8,19 @@ public class HumanSpawner : SpawnerBase,ISpawnerOnScreenLoad
 
     private void Start()
     {
+        IsFinished = false;
         Pooling = HumanPooling.Instance;
-        ActiveGameObjects.Add(Pooling.ActiveGameObjects[0]);
-        Pooling.ActiveGameObjects[0].transform.position = transform.position;
+        foreach (var passenger in Pooling.ActiveGameObjects)
+        {
+            if (!passenger.GetComponent<Passenger>().IsPassenger)
+            {
+                ActiveGameObjects.Add(passenger);
+                passenger.transform.position = transform.position;
+                passenger.GetComponent<Passenger>().IsPassenger = true;
+                break;
+            }  
+        }
+        
     }
 
 
@@ -23,6 +33,10 @@ public class HumanSpawner : SpawnerBase,ISpawnerOnScreenLoad
             {
                 base.Spawn();
             }
+        }
+        else
+        {
+            IsFinished = true;
         }
 
     }

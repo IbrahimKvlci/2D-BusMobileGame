@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IFinishPoint:IFinishable
+public class BusGameControl : EntityGameControlBase<BusController>
 {
+    
 }

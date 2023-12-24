@@ -11,6 +11,7 @@ public class MainMenuUIManager : MonoBehaviour
     private void Start()
     {
         SetCoinCount();
+        print(PlayerPrefsManager.GetCoin());
     }
 
     public void Play()

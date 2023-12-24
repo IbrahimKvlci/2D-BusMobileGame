@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class BusController : MonoBehaviour, IMovable
+public class BusController : MonoBehaviour, IMovable,IFinishable
 {
     [SerializeField] Transform _path;
 
@@ -17,11 +17,13 @@ public class BusController : MonoBehaviour, IMovable
     bool _lineFinished;
 
     public bool CanMove { get ; set ; }
+    public bool IsFinished { get; set; }
 
     private void Start()
     {
         _counter = _counterFirstValue;
         CanMove = true;
+        IsFinished = false;
     }
 
     public void Move()
@@ -54,9 +56,9 @@ public class BusController : MonoBehaviour, IMovable
         {
             Move();
         }
-        else if(_lineFinished && !GameController.Instance.IsFinished)
+        else if(_lineFinished)
         {
-            GameController.Instance.GameOver();
+            IsFinished = true;
         }
     }
 }

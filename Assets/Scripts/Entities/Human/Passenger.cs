@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Passenger : Entity,IHittable
 {
-    
+    public bool IsPassenger { get; set; }
 }

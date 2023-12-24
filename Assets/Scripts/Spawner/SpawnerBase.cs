@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SpawnerBase : MonoBehaviour, ISpawner
+public abstract class SpawnerBase : MonoBehaviour, ISpawner,IFinishable
 {
     
 
@@ -30,12 +30,14 @@ public abstract class SpawnerBase : MonoBehaviour, ISpawner
         set { _gameObj = value; }
     }
 
-    List<GameObject> _activeGameObjects=new List<GameObject>();
+    [SerializeField] List<GameObject> _activeGameObjects=new List<GameObject>();
     public List<GameObject> ActiveGameObjects
     {
         get { return _activeGameObjects; }
         set { _activeGameObjects = value; }
     }
+
+    public bool IsFinished { get; set; }
 
     public virtual void Spawn()
     {

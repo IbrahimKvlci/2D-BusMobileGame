@@ -6,4 +6,5 @@ public interface ISpawner
 {
     void Spawn();
     public List<GameObject> ActiveGameObjects { get; set; }
+
 }

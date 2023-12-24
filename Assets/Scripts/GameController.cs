@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
         _start = false;
         IsGameOver = false;
         _runOnLoad = FindObjectsOfType<MonoBehaviour>(false).OfType<IRunOnLoad>().ToArray();
-        _runOnStart = FindObjectsOfType<MonoBehaviour>(false).OfType<IRunOnStart>().ToArray();
+        _runOnStart = FindObjectsOfType<MonoBehaviour>(true).OfType<IRunOnStart>().ToArray();
         _pathService = GetComponent<IPathService>();
         Time.timeScale = 1;
     }
@@ -73,6 +73,8 @@ public class GameController : MonoBehaviour
     public void Finish()
     {
         PlayerPrefsManager.SetPlayerLevel(PlayerPrefsManager.GetLevel() + 1);
+        print(PlayerPrefsManager.GetCoin());
+        print(CollectibleManager.Instance.CoinCount);
         PlayerPrefsManager.SetCoin(PlayerPrefsManager.GetCoin() + CollectibleManager.Instance.CoinCount);
         UIManager.instance.FinishGame();
         print("Finish");
@@ -91,7 +93,6 @@ public class GameController : MonoBehaviour
         Debug.Log("Game Over!");
         IsGameOver = true;
         Pause();
-        
     }
 
     void Pause()

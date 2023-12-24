@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HumanPooling : PoolingBase,IPooling
@@ -14,9 +15,13 @@ public class HumanPooling : PoolingBase,IPooling
             Instance = this;
         }
         base.Awake();
-        var activeGameObject= GetRandomGameObjectFromPool();
-        ActiveGameObjects.Add(activeGameObject);
-        activeGameObject.SetActive(true);
+        int countOfStation=FindObjectsOfType<MonoBehaviour>(false).OfType<IStation>().Count();
+        for (int i = 0; i < countOfStation; i++)
+        {
+            var activeGameObject = GetRandomGameObjectFromPool();
+            ActiveGameObjects.Add(activeGameObject);
+            activeGameObject.SetActive(true);
+        }
     }
 
 

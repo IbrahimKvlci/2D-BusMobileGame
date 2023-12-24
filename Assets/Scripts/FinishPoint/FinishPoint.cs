@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinishPoint : MonoBehaviour,IFinishPoint
+public class FinishPoint : MonoBehaviour, IFinishPoint
 {
     HumanSpawner _humanSpawner;
     ISensor _sensor;
 
+    public bool IsFinished { get;set; }
+
     private void Start()
     {
-        _humanSpawner=FindObjectOfType<HumanSpawner>();
+        IsFinished = false;
+        _humanSpawner =FindObjectOfType<HumanSpawner>();
     }
 
     private void Update()
@@ -18,24 +21,7 @@ public class FinishPoint : MonoBehaviour,IFinishPoint
         {
             if (_sensor.IsSensedOnFinishPoint())
             {
-                if (_humanSpawner != null)
-                {
-                    if (_humanSpawner.ActiveGameObjects.Count == 0)
-                    {
-                        if (!GameController.Instance.IsFinished)
-                        {
-                            GameController.Instance.Finish();
-                        }
-                        
-                    }
-                }
-                else
-                {
-                    if (!GameController.Instance.IsFinished)
-                    {
-                        GameController.Instance.Finish();
-                    }
-                }
+                IsFinished = true;
             }
         }
     }
